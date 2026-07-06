@@ -16,6 +16,7 @@ Optional:
     - collation
     - database_format
     - dns_zone_partner_id
+    - general_purpose_v2_enabled
     - hybrid_secondary_usage
     - maintenance_configuration_name
     - minimum_tls_version
@@ -23,6 +24,7 @@ Optional:
     - public_data_endpoint_enabled
     - service_principal_type
     - storage_account_type
+    - storage_iops
     - tags
     - timezone_id
     - zone_redundant_enabled
@@ -47,15 +49,17 @@ EOT
     subnet_id                      = string
     vcores                         = number
     tags                           = optional(map(string))
+    storage_iops                   = optional(number)
     storage_account_type           = optional(string) # Default: "GRS"
     service_principal_type         = optional(string)
     public_data_endpoint_enabled   = optional(bool) # Default: false
     proxy_override                 = optional(string)
     minimum_tls_version            = optional(string) # Default: "1.2"
-    database_format                = optional(string) # Default: "SQLServer2022"
-    hybrid_secondary_usage         = optional(string) # Default: "Active"
     dns_zone_partner_id            = optional(string)
+    hybrid_secondary_usage         = optional(string) # Default: "Active"
+    general_purpose_v2_enabled     = optional(bool)   # Default: false
     timezone_id                    = optional(string) # Default: "UTC"
+    database_format                = optional(string) # Default: "SQLServer2022"
     collation                      = optional(string) # Default: "SQL_Latin1_General_CP1_CI_AS"
     administrator_login_password   = optional(string)
     administrator_login            = optional(string)
