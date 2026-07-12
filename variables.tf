@@ -13,6 +13,8 @@ Required:
 Optional:
     - administrator_login
     - administrator_login_password
+    - administrator_login_password_key_vault_id (alternative to administrator_login_password - read from Key Vault instead)
+    - administrator_login_password_key_vault_secret_name (alternative to administrator_login_password - read from Key Vault instead)
     - collation
     - database_format
     - dns_zone_partner_id
@@ -40,31 +42,33 @@ Optional:
 EOT
 
   type = map(object({
-    license_type                   = string
-    location                       = string
-    name                           = string
-    resource_group_name            = string
-    sku_name                       = string
-    storage_size_in_gb             = number
-    subnet_id                      = string
-    vcores                         = number
-    tags                           = optional(map(string))
-    storage_iops                   = optional(number)
-    storage_account_type           = optional(string) # Default: "GRS"
-    service_principal_type         = optional(string)
-    public_data_endpoint_enabled   = optional(bool) # Default: false
-    proxy_override                 = optional(string)
-    minimum_tls_version            = optional(string) # Default: "1.2"
-    dns_zone_partner_id            = optional(string)
-    hybrid_secondary_usage         = optional(string) # Default: "Active"
-    general_purpose_v2_enabled     = optional(bool)   # Default: false
-    timezone_id                    = optional(string) # Default: "UTC"
-    database_format                = optional(string) # Default: "SQLServer2022"
-    collation                      = optional(string) # Default: "SQL_Latin1_General_CP1_CI_AS"
-    administrator_login_password   = optional(string)
-    administrator_login            = optional(string)
-    maintenance_configuration_name = optional(string) # Default: "SQL_Default"
-    zone_redundant_enabled         = optional(bool)   # Default: false
+    license_type                                       = string
+    location                                           = string
+    name                                               = string
+    resource_group_name                                = string
+    sku_name                                           = string
+    storage_size_in_gb                                 = number
+    subnet_id                                          = string
+    vcores                                             = number
+    tags                                               = optional(map(string))
+    storage_iops                                       = optional(number)
+    storage_account_type                               = optional(string) # Default: "GRS"
+    service_principal_type                             = optional(string)
+    public_data_endpoint_enabled                       = optional(bool) # Default: false
+    proxy_override                                     = optional(string)
+    minimum_tls_version                                = optional(string) # Default: "1.2"
+    dns_zone_partner_id                                = optional(string)
+    hybrid_secondary_usage                             = optional(string) # Default: "Active"
+    general_purpose_v2_enabled                         = optional(bool)   # Default: false
+    timezone_id                                        = optional(string) # Default: "UTC"
+    database_format                                    = optional(string) # Default: "SQLServer2022"
+    collation                                          = optional(string) # Default: "SQL_Latin1_General_CP1_CI_AS"
+    administrator_login_password                       = optional(string)
+    administrator_login_password_key_vault_id          = optional(string)
+    administrator_login_password_key_vault_secret_name = optional(string)
+    administrator_login                                = optional(string)
+    maintenance_configuration_name                     = optional(string) # Default: "SQL_Default"
+    zone_redundant_enabled                             = optional(bool)   # Default: false
     azure_active_directory_administrator = optional(object({
       azuread_authentication_only_enabled = optional(bool) # Default: false
       login_username                      = string

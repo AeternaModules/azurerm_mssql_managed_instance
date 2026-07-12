@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "administrator_login_password" {
+  for_each     = { for k, v in var.mssql_managed_instances : k => v if v.administrator_login_password_key_vault_id != null && v.administrator_login_password_key_vault_secret_name != null }
+  name         = each.value.administrator_login_password_key_vault_secret_name
+  key_vault_id = each.value.administrator_login_password_key_vault_id
+}
 resource "azurerm_mssql_managed_instance" "mssql_managed_instances" {
   for_each = var.mssql_managed_instances
 
@@ -22,7 +27,7 @@ resource "azurerm_mssql_managed_instance" "mssql_managed_instances" {
   timezone_id                    = each.value.timezone_id
   database_format                = each.value.database_format
   collation                      = each.value.collation
-  administrator_login_password   = each.value.administrator_login_password
+  administrator_login_password   = each.value.administrator_login_password != null ? each.value.administrator_login_password : try(data.azurerm_key_vault_secret.administrator_login_password[each.key].value, null)
   administrator_login            = each.value.administrator_login
   maintenance_configuration_name = each.value.maintenance_configuration_name
   zone_redundant_enabled         = each.value.zone_redundant_enabled
