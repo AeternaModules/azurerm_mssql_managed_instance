@@ -1,3 +1,7 @@
+output "mssql_managed_instances_id" {
+  description = "Map of id values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
+  value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => v.id }
+}
 output "mssql_managed_instances_administrator_login" {
   description = "Map of administrator_login values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
   value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => v.administrator_login }
