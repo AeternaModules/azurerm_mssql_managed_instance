@@ -13,7 +13,7 @@ output "mssql_managed_instances_administrator_login_password" {
 }
 output "mssql_managed_instances_azure_active_directory_administrator" {
   description = "Map of azure_active_directory_administrator values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
-  value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => v.azure_active_directory_administrator if v.azure_active_directory_administrator != null && length(v.azure_active_directory_administrator) > 0 }
+  value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => one(v.azure_active_directory_administrator) if v.azure_active_directory_administrator != null && length(v.azure_active_directory_administrator) > 0 }
 }
 output "mssql_managed_instances_collation" {
   description = "Map of collation values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
@@ -45,7 +45,7 @@ output "mssql_managed_instances_hybrid_secondary_usage" {
 }
 output "mssql_managed_instances_identity" {
   description = "Map of identity values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
-  value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_mssql_managed_instance.mssql_managed_instances : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "mssql_managed_instances_license_type" {
   description = "Map of license_type values across all mssql_managed_instances, keyed the same as var.mssql_managed_instances"
